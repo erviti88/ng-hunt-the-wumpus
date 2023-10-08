@@ -1,1 +1,35 @@
-<p>room works!</p>
+<!-- room.component.html -->
+
+<div class="maze__room">
+    <!-- Indicador para Wumpus -->
+    <div *ngIf="room.hasWumpus" class="room__indicator room__wumpus">
+      <img src="../../../assets/img/wumpus.svg" alt="wumpus">
+    </div>
+  
+    <!-- Indicador para Pit -->
+    <div *ngIf="room.hasPit" class="room__indicator room__pit">
+      <img src="../../../assets/img/pit.svg" alt="pit">
+    </div>
+  
+    <!-- Indicador para Treasure -->
+    <div *ngIf="room.hasTreasure" class="room__indicator room__treasure">
+      <img src="../../../assets/img/treasure.svg" alt="treasure">
+    </div>
+  
+    <!-- Indicador para Breeze -->
+    <div *ngIf="room.hasBreeze" class="room__indicator room__breeze">
+        Breeze
+    </div>
+    
+    <!-- Indicador para Stench -->
+    <div *ngIf="room.hasStench" class="room__indicator room__stench">
+        Stench
+    </div>
+
+    <!-- Indicador para Glitter -->
+    <div *ngIf="room.hasGlitter" class="room__indicator room__glitter">
+        Glitter
+    </div>
+</div>
+  
+<!-- room.component.html -->

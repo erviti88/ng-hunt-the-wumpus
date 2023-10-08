@@ -4,7 +4,7 @@ import { GameService } from '../../services/game.service';
 @Component({
   selector: 'app-maze',
   templateUrl: './maze.component.html',
-  styleUrls: ['./maze.component.css']
+  styleUrls: ['./maze.component.scss']
 })
 export class MazeComponent implements OnInit {
 

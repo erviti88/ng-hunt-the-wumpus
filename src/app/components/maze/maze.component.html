@@ -2,18 +2,11 @@
 
 <div class="maze-container">
     <h2 class="maze__h2">Hunt The Wumpus</h2>
-    <!-- Recorre cada fila del laberinto -->
     <div *ngFor="let row of gameService.rooms; let y = index" class="maze__row">
-        <!-- Recorre cada habitación en la fila -->
         <div *ngFor="let room of row; let x = index" class="maze__cell">
-            <!-- Muestra la habitación -->
             <app-room [room]="room"></app-room>
         </div>
     </div>
-  
-    <!-- Los controles del jugador y el tablero de puntuación pueden ir aquí si deseas que estén integrados dentro del contenedor del laberinto -->
-    <app-controls></app-controls>
-    <!-- <app-scoreboard></app-scoreboard> -->
 </div>
 
 <!-- maze.component.html -->

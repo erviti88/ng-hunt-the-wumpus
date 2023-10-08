@@ -1,0 +1,59 @@
+/* room.component.scss */
+
+.maze {
+    &__room {
+        border: 1px solid black;
+        width: 150px; 
+        height: 150px;
+        position: relative;
+    }
+}
+
+.room {
+    &__indicator {
+        position: absolute;
+        font-size: 0.8em;
+        width: 50%;
+        height: 33%;
+        text-align: center;
+        line-height: 25px;
+    }
+
+    &__wumpus {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    
+    &__pit {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    &__treasure {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    &__breeze {
+        top: 0;
+        right: 0;
+        background-color: cyan;
+    }
+
+    &__stench {
+        top: 0;
+        left: 0;
+        background-color: gray;
+    }
+    
+    &__glitter {
+        bottom: 0;
+        left: 0;
+        background-color: gold;
+    }
+}
+
+/* room.component.scss */

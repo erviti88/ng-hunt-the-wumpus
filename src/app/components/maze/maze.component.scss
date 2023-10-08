@@ -1,0 +1,27 @@
+/* maze.component.scss */
+
+.maze {
+    &-container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        width: 700px;
+        padding: 1.5rem;
+    }
+
+    &__h1 {
+        font-size: 3em;
+    }
+
+    &__row {
+        display: flex;
+    }
+
+    &__cell {
+        position: relative;
+    }
+}
+
+ /* maze.component.scss */ 
