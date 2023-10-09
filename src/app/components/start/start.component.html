@@ -4,24 +4,32 @@
   <div class="start">
     <img class="start__img" src="../../../assets/img/wumpus.svg" alt="Wumpus">
     <h1 class="start__h1">Bienvenido a Hunt The Wumpus</h1>
+
+     <!-- FORMULARIO PARA INICIAR EL JUEGO CON CONFIGURACIONES DETERMINADAS -->
     <form (ngSubmit)="startGame()">
+
+      <!-- ETIQUETA Y CAMPO PARA ESPECIFICAR EL TAMAÑO DEL TABLERO -->
       <label>
         <p class="start__p">Número de celdas del tablero:</p>
         <input type="number" [(ngModel)]="boardSize" name="boardSize">
       </label>
-          
+      
+      <!-- ETIQUETA Y CAMPO PARA ESPECIFICAR EL NÚMERO DE POZOS EN EL JUEGO -->
       <label>
         <p class="start__p">Número de pozos:</p>
         <input type="number" [(ngModel)]="numberOfPits" name="numberOfPits">
       </label>
-          
+      
+      <!-- ETIQUETA Y CAMPO PARA ESPECIFICAR LA CANTIDAD DE FLECHAS DISPONIBLES PARA EL JUGADOR -->
       <label>
         <p class="start__p">Cantidad de flechas disponibles:</p>
         <input type="number" [(ngModel)]="arrows" name="arrows">
       </label>
-            
+
+      <!-- BOTÓN PARA INICIAR EL JUEGO -->     
       <button type="submit">Iniciar Juego</button>
     </form>
+    
   </div>
 </div>
 

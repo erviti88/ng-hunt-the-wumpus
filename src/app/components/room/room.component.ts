@@ -11,6 +11,7 @@ export class RoomComponent {
 
   constructor() { }
 
+  // MÉTODO QUE SE EJECUTA CUANDO SE INICIA EL COMPONENTE
   ngOnInit(): void {
     
   }

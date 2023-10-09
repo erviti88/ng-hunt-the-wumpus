@@ -6,24 +6,25 @@ import { Room, Player } from '../models/interfaces'; // IMPORTAMOS LAS INTERFACE
 })
 export class GameService {
 
-  // PROPIEDADES DE LA CLASE
-
+  // VARIABLES DE ESTADO PARA LAS HABITACIONES Y EL JUGADOR
   rooms: Room[][] = [];
   player!: Player;
+
+  // DIMENSIONES DEL LABERINTO
   numRows!: number;
   numCols!: number;
 
+  // CONFIGURACIÓN ACTUAL
   currentRows!: number;
   currentCols!: number;
   currentPits!: number;
   currentArrows!: number;
 
-  // FUNCIONES PRINCIPALES
-
   constructor() {
     this.initializeGame();
   }
 
+  //  INICIALIZA EL JUEGO CON PARÁMETROS POR DEFECTO
   initializeGame(rows: number = 4, cols: number = 4, pits: number = 3, arrows: number = 1) {
     this.currentRows = rows;
     this.currentCols = cols;
@@ -37,15 +38,18 @@ export class GameService {
     this.rooms[this.numRows - 1][0].isVisited = true;
   }
 
+  // REINICIA EL JUEGO MANTENIENDO LA CONFIGURACIÓN ACTUAL
   restartGame() {
     this.initializeGame(this.currentRows, this.currentCols, this.currentPits, this.currentArrows);
   }
-    
+  
+  // CONFIGURA LAS DIMENSIONES DEL LABERINTO
   setMazeDimensions(rows: number, cols: number) {
     this.numRows = rows;
     this.numCols = cols;
   }
 
+  // CONSTRUYE EL LABERIBNTO VACÍO BASÁNDOSE EN LAS DIMENSIONES ESPECIFICADAS
   generateMaze() {
     for (let i = 0; i < this.numRows; i++) {
       this.rooms[i] = [];
@@ -63,6 +67,7 @@ export class GameService {
     }
   }
 
+  // COLOCA LOS ELEMENTOS DEL JUEGO EN EL LABERINTO
   placeGameElements(numPits: number) {
     this.placeItemRandomly('hasWumpus', 1);
     this.placeItemRandomly('hasPit', numPits);
@@ -70,6 +75,7 @@ export class GameService {
     this.setPerceptions();
   }
   
+  // ESTABLECE LAS PROPIEDADES INICIALES DEL JUGADOR
   initializePlayer(arrows: number) {
     this.player = {
         rowPosition: this.numRows - 1,
@@ -81,8 +87,7 @@ export class GameService {
     };
   }
   
-  // LÓGICA DEL JUEGO
-
+  // COLOCA LOS ELEMENTOS DEL JUEGO EN UNA POSICIÓN ALEATORIA
   placeItemRandomly(item: keyof Room, count: number) {
     for (let i = 0; i < count; i++) {
       let placed = false;
@@ -100,7 +105,8 @@ export class GameService {
       }
     }
   }
-
+  
+  //ESTABLECE LAS PERCEPCIONES EN LAS HABITACIONES EN FUNCIÓN DE LOS ELEMENTOS
   setPerceptions() {
     for (let i = 0; i < this.numRows; i++) {
       for (let j = 0; j < this.numCols; j++) {
@@ -117,6 +123,7 @@ export class GameService {
     }
   }
 
+  // MUEVE AL JUGARDOR EN LA DIRECCIÓN ESPECIFICADA SI ES UN MOVIMIENTO VÁLIDO
   movePlayer(direction: 'NORTH' | 'SOUTH' | 'EAST' | 'WEST') {
     let newRow = this.player.rowPosition;
     let newCol = this.player.colPosition;
@@ -146,6 +153,7 @@ export class GameService {
     }
   }
 
+  // CAMBIA LA DIRECCIÓN DEL JUGADOR
   turnPlayer(direction: 'LEFT' | 'RIGHT') {
     const directions = ['NORTH', 'EAST', 'SOUTH', 'WEST'];
     const currentIndex = directions.indexOf(this.player.direction);
@@ -157,6 +165,7 @@ export class GameService {
     }
   }
 
+  // EL JUGADOR DISPARA UNA FLECHA DESDE EN SU DIRECCIÓN ACTUAL
   shootArrow() {
     if (this.player.arrows > 0) {
       let row = this.player.rowPosition;
@@ -190,6 +199,7 @@ export class GameService {
     }
   }
 
+  // EL JUGADOR RECOGE EL ORO SI ESTÁ EN SU MISMA HABITACIÓN
   pickGold() {
     if (this.rooms[this.player.rowPosition][this.player.colPosition].hasTreasure) {
       this.player.hasGold = true;
@@ -200,6 +210,7 @@ export class GameService {
     }
   }
 
+  // COMPRUEBA SI EL JUGADOR SE ENCUENTRA CON UN POZO O AL WUMPUS
   checkPlayerStatus() {
     const currentRoom = this.rooms[this.player.rowPosition][this.player.colPosition];
 
@@ -218,8 +229,8 @@ export class GameService {
     }
   }
 
+  // EL JUGADOR INTENTA SALIR DEL LABERINTO
   exitMaze() {
-    console.log("Intentando salir del laberinto");
     if (this.player.rowPosition === this.numRows - 1 && this.player.colPosition === 0) {
       if (this.player.hasGold) {
         this.playerWins();
@@ -231,6 +242,7 @@ export class GameService {
     }
   }
 
+  // ANUNCIA QUE EL JUGADOR HA GANADO Y EL JUEGO SE REINICA
   playerWins() {
     alert('¡Has ganado el juego!');
     this.restartGame();
@@ -238,6 +250,7 @@ export class GameService {
 
   // FUNCIONES DE AYUDA
 
+  // ESTABLECE LA PERCEPCIÓN EN LAS CASILLAS ADYACENTES A LOS ELEMENTOS
   setPerceptionForAdjacentRooms(row: number, col: number, perception: keyof Room) {
     const adjacentRooms = [
       { r: row - 1, c: col },
@@ -253,6 +266,7 @@ export class GameService {
     }
   }
 
+  // COMPRUEBA SI UN MOVIMIENTO ES VÁLIDO
   isValidMove(row: number, col: number): boolean {
     return row >= 0 && row < this.numRows && col >= 0 && col < this.numCols;
   }

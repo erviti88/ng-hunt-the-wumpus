@@ -1,32 +1,32 @@
 <!-- room.component.html -->
 
 <div class="maze__room" [class.visited]="room.isVisited">
-    <!-- Indicador para Wumpus -->
+    <!-- SI LA HABITACIÓN TIENE UN WUMPUS, MUESTRA ESTE INDICADOR -->
     <div *ngIf="room.hasWumpus" class="room__indicator room__wumpus">
       <img src="../../../assets/img/wumpus.svg" alt="wumpus">
     </div>
   
-    <!-- Indicador para Pit -->
+    <!-- SI LA HABITACIÓN TIENE UN POZO, MUESTRA ESTE INDICADOR -->
     <div *ngIf="room.hasPit" class="room__indicator room__pit">
       <img src="../../../assets/img/pit.svg" alt="pit">
     </div>
   
-    <!-- Indicador para Treasure -->
+    <!-- SI LA HABITACIÓN TIENE UN TESORO, MUESTRA ESTE INDICADOR -->
     <div *ngIf="room.hasTreasure" class="room__indicator room__treasure">
       <img src="../../../assets/img/treasure.svg" alt="treasure">
     </div>
   
-    <!-- Indicador para Breeze -->
+    <!-- SI LA HABITACIÓN TIENE UNA BRISA, MUESTRA ESTE INDICADOR DE TEXTO -->
     <div *ngIf="room.hasBreeze" class="room__indicator room__breeze">
         Breeze
     </div>
     
-    <!-- Indicador para Stench -->
+    <!-- SI LA HABITACIÓN TIENE UN HEDOR, MUESTRA ESTE INDICADOR DE TEXTO -->
     <div *ngIf="room.hasStench" class="room__indicator room__stench">
         Stench
     </div>
 
-    <!-- Indicador para Glitter -->
+    <!-- SI LA HABITACIÓN TIENE UN BRILLO, MUESTRA ESTE INDICADOR DE TEXTO -->
     <div *ngIf="room.hasGlitter" class="room__indicator room__glitter">
         Glitter
     </div>

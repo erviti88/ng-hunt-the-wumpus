@@ -10,6 +10,7 @@ import { Player } from '../../models/interfaces';
 export class PlayerComponent {
   @Input() player!: Player;
 
+  // FUNCION PARA ESTABLECER ESTILOS DINÁMICAMENTE BASADOS EN SU DIRECCIÓN 
   get playerDirectionClass(): string {
     return `direction-${this.player.direction.toLowerCase()}`;
   }

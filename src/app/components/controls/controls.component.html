@@ -1,12 +1,16 @@
 <!-- controls.component.html -->
 
 <div class="controls">
+
+    <!-- BOTONES PARA MOVER AL JUGADOR -->
     <div class="controls__move">
         <button class="controls__button" (click)="move('NORTH')">Move Up</button>
         <button class="controls__button" (click)="move('SOUTH')">Move Down</button>
         <button class="controls__button" (click)="move('WEST')">Move Left</button>
         <button class="controls__button" (click)="move('EAST')">Move Right</button>
     </div>
+
+    <!-- BOTONES PARA ACCIONES ESPECÍFICAS DEL JUGADOR -->
     <div class="controls__action">
         <button class="controls__button" (click)="turn('LEFT')">Turn Left</button>
         <button class="controls__button" (click)="turn('RIGHT')">Turn Right</button>
