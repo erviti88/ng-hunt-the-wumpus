@@ -1,0 +1,68 @@
+/* start.component.scss */
+
+.start {
+    background-color: #2E2E2E;
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+    padding: 50px;
+    border: 5px solid #ff4400;
+
+    &__img {
+        margin: 0 auto 2em auto;
+    }  
+
+    &__h1 {
+        text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+    }
+  
+    &__p {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+    }
+
+    label {
+        display: block;
+        margin-bottom: 15px;
+    }
+
+    input[type="number"] {
+        font-family: 'Press Start 2P', cursive;
+        background-color: black;
+        color: white;
+        border: 2px solid #ff4400;
+        padding: 5px;
+        font-size: 1em;
+        width: 100px;
+        text-align: center;
+
+        &:focus {
+            outline: none;
+            border-color: yellow;
+        }
+    }
+
+    button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-family: 'Press Start 2P', cursive;
+        font-size: 1em;
+        color: black;
+        background-color: #ff4400;
+        border: none;
+        cursor: pointer;
+        text-shadow: none;
+        transition: background-color 0.3s, transform 0.3s;
+
+        &:hover {
+            background-color: yellow;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
+/* start.component.scss */

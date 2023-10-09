@@ -1,0 +1,28 @@
+<!-- start.component.html -->
+
+<div class="start-container">
+  <div class="start">
+    <img class="start__img" src="../../../assets/img/wumpus.svg" alt="Wumpus">
+    <h1 class="start__h1">Bienvenido a Hunt The Wumpus</h1>
+    <form (ngSubmit)="startGame()">
+      <label>
+        <p class="start__p">Número de celdas del tablero:</p>
+        <input type="number" [(ngModel)]="boardSize" name="boardSize">
+      </label>
+          
+      <label>
+        <p class="start__p">Número de pozos:</p>
+        <input type="number" [(ngModel)]="numberOfPits" name="numberOfPits">
+      </label>
+          
+      <label>
+        <p class="start__p">Cantidad de flechas disponibles:</p>
+        <input type="number" [(ngModel)]="arrows" name="arrows">
+      </label>
+            
+      <button type="submit">Iniciar Juego</button>
+    </form>
+  </div>
+</div>
+
+<!-- start.component.html -->

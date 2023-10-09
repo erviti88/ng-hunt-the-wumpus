@@ -13,21 +13,32 @@ export class GameService {
   numRows!: number;
   numCols!: number;
 
+  currentRows!: number;
+  currentCols!: number;
+  currentPits!: number;
+  currentArrows!: number;
+
   // FUNCIONES PRINCIPALES
 
   constructor() {
     this.initializeGame();
   }
 
-  initializeGame() {
-    this.setMazeDimensions(4, 4);
+  initializeGame(rows: number = 4, cols: number = 4, pits: number = 3, arrows: number = 1) {
+    this.currentRows = rows;
+    this.currentCols = cols;
+    this.currentPits = pits;
+    this.currentArrows = arrows;
+    
+    this.setMazeDimensions(rows, cols);
     this.generateMaze();
-    this.placeGameElements();
-    this.initializePlayer();
+    this.placeGameElements(pits);
+    this.initializePlayer(arrows);
+    this.rooms[this.numRows - 1][0].isVisited = true;
   }
 
   restartGame() {
-    this.initializeGame();
+    this.initializeGame(this.currentRows, this.currentCols, this.currentPits, this.currentArrows);
   }
     
   setMazeDimensions(rows: number, cols: number) {
@@ -45,27 +56,28 @@ export class GameService {
           hasTreasure: false,
           hasStench: false,
           hasBreeze: false,
-          hasGlitter: false
+          hasGlitter: false,
+          isVisited: false
         };
       }
     }
   }
 
-  placeGameElements() {
+  placeGameElements(numPits: number) {
     this.placeItemRandomly('hasWumpus', 1);
-    this.placeItemRandomly('hasPit', 3);
+    this.placeItemRandomly('hasPit', numPits);
     this.placeItemRandomly('hasTreasure', 1);
     this.setPerceptions();
   }
   
-  initializePlayer() {
+  initializePlayer(arrows: number) {
     this.player = {
-      rowPosition: this.numRows - 1,
-      colPosition: 0,
-      direction: 'EAST',
-      isAlive: true,
-      hasGold: false,
-      arrows: 1
+        rowPosition: this.numRows - 1,
+        colPosition: 0,
+        direction: 'EAST',
+        isAlive: true,
+        hasGold: false,
+        arrows: arrows
     };
   }
   
@@ -79,10 +91,8 @@ export class GameService {
         let randomRow = Math.floor(Math.random() * this.numRows);
         let randomCol = Math.floor(Math.random() * this.numCols);
       
-        // Verifica que la celda no tiene ninguno de los otros elementos antes de colocar el nuevo.
         const cell = this.rooms[randomRow][randomCol];
       
-        // Asegúrate de que las coordenadas no sean las mismas que las del punto de partida del jugador
         if (!cell.hasWumpus && !cell.hasPit && !cell.hasTreasure && (randomRow !== this.numRows - 1 || randomCol !== 0)) {
           cell[item] = true;
           placed = true;
@@ -100,7 +110,6 @@ export class GameService {
         if (this.rooms[i][j].hasPit) {
           this.setPerceptionForAdjacentRooms(i, j, 'hasBreeze');
         }
-        // Añade estas líneas
         if (this.rooms[i][j].hasTreasure) {
           this.setPerceptionForAdjacentRooms(i, j, 'hasGlitter');
         }
@@ -130,13 +139,12 @@ export class GameService {
     if (this.isValidMove(newRow, newCol)) {
       this.player.rowPosition = newRow;
       this.player.colPosition = newCol;
-      // Check for player's death or victory after the move.
+      this.rooms[newRow][newCol].isVisited = true;
       this.checkPlayerStatus();
     } else {
-      console.log('Player bumped into a wall');
+      alert('¡Has chocado contra un muro!');
     }
   }
-
 
   turnPlayer(direction: 'LEFT' | 'RIGHT') {
     const directions = ['NORTH', 'EAST', 'SOUTH', 'WEST'];
@@ -178,7 +186,7 @@ export class GameService {
       }
       this.player.arrows--;
     } else {
-      console.log('No arrows left');
+      console.log('¡Te has quedado sin flechas!');
     }
   }
 
@@ -186,9 +194,9 @@ export class GameService {
     if (this.rooms[this.player.rowPosition][this.player.colPosition].hasTreasure) {
       this.player.hasGold = true;
       this.rooms[this.player.rowPosition][this.player.colPosition].hasTreasure = false;
-      console.log('Gold collected!');
+      alert('¡Has encontrado el oro!');
     } else {
-      console.log('No gold here');
+      alert('No hay oro aquí.');
     }
   }
 
@@ -197,17 +205,35 @@ export class GameService {
 
     if (currentRoom.hasPit) {
         this.player.isAlive = false;
-        alert('¡Has caído en un pozo!'); // Mostrar alerta
-        this.restartGame(); // Llamar a una función para reiniciar el juego
+        alert('¡Has caído en un pozo!');
+        this.restartGame();
         return;
     }
 
     if (currentRoom.hasWumpus) {
         this.player.isAlive = false;
-        alert('¡El Wumpus te ha comido!'); // Mostrar alerta
-        this.restartGame(); // Llamar a una función para reiniciar el juego
+        alert('¡El Wumpus te ha comido!');
+        this.restartGame();
         return;
     }
+  }
+
+  exitMaze() {
+    console.log("Intentando salir del laberinto");
+    if (this.player.rowPosition === this.numRows - 1 && this.player.colPosition === 0) {
+      if (this.player.hasGold) {
+        this.playerWins();
+      } else {
+        alert('Debes tener el oro para salir del laberinto.');
+      }
+    } else {
+      alert('Debes estar en la casilla de inicio para intentar salir.');
+    }
+  }
+
+  playerWins() {
+    alert('¡Has ganado el juego!');
+    this.restartGame();
   }
 
   // FUNCIONES DE AYUDA

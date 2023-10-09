@@ -1,14 +1,18 @@
 <!-- controls.component.html -->
 
 <div class="controls">
-    <button (click)="move('NORTH')">Move Up</button>
-    <button (click)="move('SOUTH')">Move Down</button>
-    <button (click)="move('EAST')">Move Right</button>
-    <button (click)="move('WEST')">Move Left</button>
-    <button (click)="turn('LEFT')">Turn Left</button>
-    <button (click)="turn('RIGHT')">Turn Right</button>
-    <button (click)="shoot()">Shoot Arrow</button>
-    <button (click)="pickGold()">Pick Gold</button>
+    <div class="controls__move">
+        <button class="controls__button" (click)="move('NORTH')">Move Up</button>
+        <button class="controls__button" (click)="move('SOUTH')">Move Down</button>
+        <button class="controls__button" (click)="move('WEST')">Move Left</button>
+        <button class="controls__button" (click)="move('EAST')">Move Right</button>
+    </div>
+    <div class="controls__action">
+        <button class="controls__button" (click)="turn('LEFT')">Turn Left</button>
+        <button class="controls__button" (click)="turn('RIGHT')">Turn Right</button>
+        <button class="controls__button " (click)="shoot()">Shoot Arrow</button>
+        <button class="controls__button" (click)="pickGold()">Pick Gold</button>
+    </div>
 </div>
 
 <!-- controls.component.html -->

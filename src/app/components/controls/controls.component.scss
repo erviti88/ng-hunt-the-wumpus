@@ -1,4 +1,38 @@
+/* controls.component.scss */
+
 .controls {
     display: flex;
-    gap: 10px;
+    flex-direction: column;
+    gap: 0.5em;
+    align-items: center;
+    margin-top: 1em;
+
+    &__move, &__action {
+        display: flex;
+        gap: 1em;
+        justify-content: center;
+    }
+
+    &__button {
+        display: inline-block;
+        padding: 0.75em 0.5em;
+        font-family: 'Press Start 2P', cursive;
+        font-size: 0.75em;
+        color: black;
+        background-color: #ff4400;
+        border: none;
+        cursor: pointer;
+        text-shadow: none;
+        transition: background-color 0.3s, transform 0.3s;
+
+        &:hover {
+            background-color: yellow;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
 }
+
+/* controls.component.scss */
