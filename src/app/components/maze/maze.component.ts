@@ -12,4 +12,8 @@ export class MazeComponent implements OnInit {
 
   // MÉTODO QUE SE EJECUTA CUANDO SE INICIA EL COMPONENTE
   ngOnInit(): void { }
+
+  handleTurn(direction: 'LEFT' | 'RIGHT') {
+    // Actualizar la dirección del jugador aquí, si es necesario
+  }
 }

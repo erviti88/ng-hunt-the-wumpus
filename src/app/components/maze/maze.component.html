@@ -17,7 +17,7 @@
     </div>
     
     <!-- COMPONENTE DE CONTROLES PARA INTERACTUAR CON EL LABERINTO -->
-    <app-controls></app-controls>
+    <app-controls (turnEvent)="handleTurn($event)"></app-controls>
 </div>
 
 <!-- maze.component.html -->

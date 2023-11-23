@@ -81,10 +81,12 @@ export class GameService {
         rowPosition: this.numRows - 1,
         colPosition: 0,
         direction: 'EAST',
-        isAlive: true,
+        isPlayerAlive: true,
+        isWumpusDead: false,
         hasGold: false,
         arrows: arrows
     };
+    console.log('Estado del jugador:', this.player); // Agregar esta línea
   }
   
   // COLOCA LOS ELEMENTOS DEL JUEGO EN UNA POSICIÓN ALEATORIA
@@ -150,7 +152,9 @@ export class GameService {
       this.checkPlayerStatus();
     } else {
       alert('¡Has chocado contra un muro!');
+      console.log('¡Has chocado contra un muro!');
     }
+    console.log('Estado del jugador:', this.player); // Agregar esta línea
   }
 
   // CAMBIA LA DIRECCIÓN DEL JUGADOR
@@ -174,7 +178,9 @@ export class GameService {
       while (this.isValidMove(row, col)) {
         if (this.rooms[row][col].hasWumpus) {
           this.rooms[row][col].hasWumpus = false;
+          this.player.isWumpusDead = true;
           alert('¡Has matado al Wumpus!');
+          console.log('¡Has matado al Wumpus!');
           return;
         }
 
@@ -193,8 +199,14 @@ export class GameService {
             break;
         }
       }
+
+      alert('¡Has fallado!');
+      console.log('¡Has fallado!');
+
       this.player.arrows--;
+
     } else {
+      alert('¡Te has quedado sin flechas!');
       console.log('¡Te has quedado sin flechas!');
     }
   }
@@ -205,8 +217,10 @@ export class GameService {
       this.player.hasGold = true;
       this.rooms[this.player.rowPosition][this.player.colPosition].hasTreasure = false;
       alert('¡Has encontrado el oro!');
+      console.log('¡Has encontrado el oro!');
     } else {
       alert('No hay oro aquí.');
+      console.log('No hay oro aquí.');
     }
   }
 
@@ -215,36 +229,45 @@ export class GameService {
     const currentRoom = this.rooms[this.player.rowPosition][this.player.colPosition];
 
     if (currentRoom.hasPit) {
-        this.player.isAlive = false;
-        alert('¡Has caído en un pozo!');
-        this.restartGame();
-        return;
+      this.player.isPlayerAlive = false;
+      alert('¡Has caído en un pozo!');
+      console.log('¡Has caído en un pozo!')
+      this.restartGame();
+      return;
     }
 
     if (currentRoom.hasWumpus) {
-        this.player.isAlive = false;
-        alert('¡El Wumpus te ha comido!');
-        this.restartGame();
-        return;
+      this.player.isPlayerAlive = false;
+      alert('¡El Wumpus te ha comido!');
+      console.log('¡El Wumpus te ha comido!')
+      this.restartGame();
+      return;
+    }
+
+    if (this.player.isWumpusDead && this.player.hasGold && this.player.rowPosition === this.numRows - 1 && this.player.colPosition === 0) {
+      this.playerWins();
     }
   }
 
-  // EL JUGADOR INTENTA SALIR DEL LABERINTO
+  /* // EL JUGADOR INTENTA SALIR DEL LABERINTO
   exitMaze() {
     if (this.player.rowPosition === this.numRows - 1 && this.player.colPosition === 0) {
       if (this.player.hasGold) {
         this.playerWins();
       } else {
         alert('Debes tener el oro para salir del laberinto.');
+        console.log('Debes tener el oro para salir del laberinto.')
       }
     } else {
       alert('Debes estar en la casilla de inicio para intentar salir.');
+      console.log('Debes estar en la casilla de inicio para intentar salir.')
     }
-  }
+  } */
 
   // ANUNCIA QUE EL JUGADOR HA GANADO Y EL JUEGO SE REINICA
   playerWins() {
     alert('¡Has ganado el juego!');
+    console.log('¡Has ganado el juego!')
     this.restartGame();
   }
 

@@ -2,7 +2,8 @@ export interface Player {
     direction: 'NORTH' | 'EAST' | 'SOUTH' | 'WEST';
     arrows: number;
     hasGold: boolean;
-    isAlive: boolean;
+    isPlayerAlive: boolean;
+    isWumpusDead: boolean;
     rowPosition: number;
     colPosition: number;
 }

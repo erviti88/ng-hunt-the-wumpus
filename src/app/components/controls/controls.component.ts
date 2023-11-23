@@ -10,6 +10,8 @@ export class ControlsComponent {
 
   constructor(public gameService: GameService) { }
 
+  @Output() turnEvent = new EventEmitter<'LEFT' | 'RIGHT'>();
+
   // MÉTODO PARA MOVER AL JUGADOR
   move(direction: 'NORTH' | 'SOUTH' | 'EAST' | 'WEST') {
     this.gameService.movePlayer(direction);
@@ -18,6 +20,7 @@ export class ControlsComponent {
   // MÉTODO PARA GIRAR AL JUGADOR
   turn(direction: 'LEFT' | 'RIGHT') {
     this.gameService.turnPlayer(direction);
+    this.turnEvent.emit(direction);
   }
 
   // MÉTODO PARA DISPARAR UNA FLECHA

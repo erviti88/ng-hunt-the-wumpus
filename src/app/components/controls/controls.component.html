@@ -14,7 +14,7 @@
     <div class="controls__action">
         <button class="controls__button" (click)="turn('LEFT')">Turn Left</button>
         <button class="controls__button" (click)="turn('RIGHT')">Turn Right</button>
-        <button class="controls__button " (click)="shoot()">Shoot Arrow</button>
+        <button class="controls__button" (click)="shoot()">Shoot Arrow({{gameService.player.arrows}})</button>
         <button class="controls__button" (click)="pickGold()">Pick Gold</button>
     </div>
 </div>
